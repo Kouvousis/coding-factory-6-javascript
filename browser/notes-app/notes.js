@@ -6,12 +6,12 @@ window.addEventListener('DOMContentLoaded', function() {
     this.setInterval(printGRDate, 1000)
 
     this.document.querySelector('#addNoteBtn').addEventListener('click', function() {
-        onInsertController(document.querySelector('#inputNote').value.trim())
+        onInsertHandler(document.querySelector('#inputNote').value.trim())
     })
 
     this.document.querySelector('#inputNote').addEventListener('keyup', function(e) {
         if (e.key === 'Enter'){
-            onInsertController(this.value.trim())
+            onInsertHandler(this.value.trim())
         }
 
     })
@@ -38,12 +38,12 @@ function printGRDate() {
 }
 
 /**
- * Controller for insert button clicked
+ * Handler for insert button clicked
  * or Enter pressed.
  * 
  * @param {string} data 
  */
-function onInsertController(data) {
+function onInsertHandler(data) {
     if (data) {
         insertNote(data)
         reset()
@@ -57,9 +57,9 @@ function insertNote(note) {
     const newNote = noteTemplate.cloneNode(true)
     newNote.classList.remove('hidden')
 
-    newNote.querySelector('.note-text').textContent = note
-    newNote.querySelector('.note-check').addEventListener('change', function() {
-        newNote.querySelector('.note-text').classList.toggle('completed')
+    newNote.querySelector('#noteTxt').textContent = note
+    newNote.querySelector('#noteCheck').addEventListener('change', function() {
+        newNote.querySelector('#noteTxt').classList.toggle('completed')
     })
     newNote.querySelector('.note-del-btn').addEventListener('click', function() {
         notesWrapper.removeChild(newNote)
