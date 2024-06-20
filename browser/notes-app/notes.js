@@ -38,15 +38,36 @@ function printGRDate() {
 }
 
 /**
- * Controller for insert button clicked.
- * @param {*} data
+ * Controller for insert button clicked
+ * or Enter pressed.
+ * 
+ * @param {string} data 
  */
-function onInsertBtnClicked(data) {
-    insertNote(data)
-    resizeTo()
+function onInsertController(data) {
+    if (data) {
+        insertNote(data)
+        reset()
+    }
 }
 
-function onInsertEnterPressed(data) {
-    insertNote(data)
-    reset()
+function insertNote(note) {
+    const notesWrapper = document.querySelector('.notes-wrapper')
+    const noteTemplate = document.querySelector('.note.hidden')
+
+    const newNote = noteTemplate.cloneNode(true)
+    newNote.classList.remove('hidden')
+
+    newNote.querySelector('.note-text').textContent = note
+    newNote.querySelector('.note-check').addEventListener('change', function() {
+        newNote.querySelector('.note-text').classList.toggle('completed')
+    })
+    newNote.querySelector('.note-del-btn').addEventListener('click', function() {
+        notesWrapper.removeChild(newNote)
+    })
+
+    notesWrapper.appendChild(newNote)
+}
+
+function reset() {
+    document.querySelector('#inputNote').value = '';
 }
