@@ -61,7 +61,7 @@ function insertNote(note) {
     newNote.querySelector('#noteCheck').addEventListener('change', function() {
         newNote.querySelector('#noteTxt').classList.toggle('completed')
     })
-    newNote.querySelector('.note-del-btn').addEventListener('click', function() {
+    newNote.querySelector('#noteDelBtn').addEventListener('click', function() {
         notesWrapper.removeChild(newNote)
     })
 
