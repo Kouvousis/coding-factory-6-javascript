@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starter template</title>
+</head>
+<body>
+    <div id="root">
+        <div id="firstname"><span></span></div>
+        <div id="lastname"></div>
+        <a href="" id="link">Visit us</a>
+        <div></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script>
+        const jsonString = `{"firstname": "jim", "lastname": "Kouv", "link": "https://codingfactory.aueb.gr/"}`
+
+        $(function() {
+            handle(JSON.parse(jsonString))
+        })
+
+        function handle(response) {
+            $('#root').find('[id]').each(function(index, item) {
+                if ($(item).is('a')) {
+                    $(item).attr('href', response[item.id])
+                } else {
+                    let valueEle = $(item).children('span')
+                    let metadataValue = response[item.id] ? response[item.id] : '-'
+                    valueEle.length ? valueEle.text(metadataValue) : $(item).text(metadataValue)
+                }
+            })
+        }
+    </script>
+</body>
+</html>
